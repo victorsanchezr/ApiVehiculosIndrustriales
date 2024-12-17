@@ -8,63 +8,63 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <script>
         onload=function(){
-            pedirJuegos();
+            pedirVehiculos();
         }
-        function pintarJuegos(lista){
+        function pintarVehiculos(lista){
             let tbody=document.getElementsByTagName("tbody")[0];
             tbody.innerHTML="";
-            lista.forEach(juego => {
+            lista.forEach(vehiculo => {
                 tbody.innerHTML+=`<tr>
-                        <td><img src="${juego.foto}" width="70"></td>
-                        <td>${juego.nombre}</td>
-                        <td>${juego.descripcion}</td>
-                        <td>${juego.precio}</td>
+                        <td><img src="${vehiculo.foto}" width="70"></td>
+                        <td>${vehiculo.nombre}</td>
+                        <td>${vehiculo.descripcion}</td>
+                        <td>${vehiculo.precio}</td>
                         <td>
-                            <a href="/static/editar_juego.html?id=${juego.id}" class="button is-info">Editar</a>
+                            <a href="/static/editar_vehiculo.html?id=${vehiculo.id}" class="button is-info">Editar</a>
                         </td>
                         <td>
-                            <button class="button is-danger" onclick="eliminarJuego(${juego.id})">Eliminar</button>
+                            <button class="button is-danger" onclick="eliminarVehiculo(${vehiculo.id})">Eliminar</button>
                         </td>
             </tr>`                            
             });
         }
-        function pedirJuegos(){
+        function pedirVehiculos(){
             var requestOptions = {
                 method: 'GET'
             };
 
-            fetch("/juegos", requestOptions)
+            fetch("/vehiculos", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status){
                         location.href="index.html";
                     } else {
-                        pintarJuegos(result);
+                        pintarVehiculos(result);
                     }
                 })
                 .catch(error => {
                     console.log('error', error);
-                    alert("Ha habido un error al recuperar los juegos. Refresque la página")
+                    alert("Ha habido un error al recuperar los vehículos. Refresque la página")
                 });
         }
-        function eliminarJuego(id){
+        function eliminarVehiculo(id){
             var requestOptions = {
                 method: 'DELETE'
             };
 
-            fetch("/juegos/"+id, requestOptions)
+            fetch("/vehiculos/"+id, requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "OK"){
-                        alert("Juego eliminado")
-                        pedirJuegos();
+                        alert("Vehículo eliminado")
+                        pedirVehiculos();
                     } else {
-                        alert("El juego no ha podido ser eliminado")
+                        alert("El vehículo no ha podido ser eliminado")
                     }
                 })
                 .catch(error => {
                     console.log('error', error);
-                    alert("Se ha producido un error y el juego no ha podido ser eliminado")
+                    alert("Se ha producido un error y el vehículo no ha podido ser eliminado")
                 });
         }
         function cerrarSesion(){
@@ -100,7 +100,7 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/static/juegos.html">Juegos</a>
+                <a class="navbar-item" href="/static/vehiculos.html">Vehículos</a>
                 <a class="navbar-item" href="/static/subida.html">Archivos</a>
                 <a class="navbar-item" href="javascript:cerrarSesion()">Cerrar sesion</a>
             </div>
@@ -113,8 +113,8 @@
     <section class="section">
         <div class="columns">
             <div class="column">
-                <h3 class="is-size-3">Juegos</h3>
-                <a href="/static/agregar_juego.html" class="button is-success">Agregar</a>
+                <h3 class="is-size-3">Vehículos</h3>
+                <a href="/static/agregar_vehiculo.html" class="button is-success">Agregar</a>
                 <table class="table">
                     <thead>
                         <tr>

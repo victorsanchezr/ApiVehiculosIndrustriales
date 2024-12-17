@@ -2,11 +2,11 @@ from __future__ import print_function
 from bd import obtener_conexion
 import sys
 
-def insertar_juego(nombre, descripcion, precio,foto):
+def insertar_vehiculo(nombre, descripcion, precio,foto):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("INSERT INTO juegos(nombre, descripcion, precio,foto) VALUES (%s, %s, %s,%s)",
+            cursor.execute("INSERT INTO vehiculos(nombre, descripcion, precio,foto) VALUES (%s, %s, %s,%s)",
                        (nombre, descripcion, precio,foto))
             if cursor.rowcount == 1:
                 ret={"status": "OK" }
@@ -16,61 +16,61 @@ def insertar_juego(nombre, descripcion, precio,foto):
         conexion.commit()
         conexion.close()
     except:
-        print("Excepcion al insertar un juego", file=sys.stdout)
+        print("Excepcion al insertar un vehículo", file=sys.stdout)
         ret = {"status": "Failure" }
         code=500
     return ret,code
 
-def convertir_juego_a_json(juego):
+def convertir_vehiculo_a_json(vehiculo):
     d = {}
-    d['id'] = juego[0]
-    d['nombre'] = juego[1]
-    d['descripcion'] = juego[2]
-    d['precio'] = juego[3]
-    d['foto'] = juego[4]
+    d['id'] = vehiculo[0]
+    d['nombre'] = vehiculo[1]
+    d['descripcion'] = vehiculo[2]
+    d['precio'] = vehiculo[3]
+    d['foto'] = vehiculo[4]
     return d
 
-def obtener_juegos():
+def obtener_vehiculos():
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM juegos")
-            juegos = cursor.fetchall()
-            juegosjson=[]
-            if juegos:
-                for juego in juegos:
-                    juegosjson.append(convertir_juego_a_json(juego))
+            cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM vehiculos")
+            vehiculos = cursor.fetchall()
+            vehiculosjson=[]
+            if vehiculos:
+                for vehiculo in vehiculos:
+                    vehiculosjson.append(convertir_vehiculo_a_json(vehiculo))
         conexion.close()
         code=200
     except:
-        print("Excepcion al obtener los juegos", file=sys.stdout)
-        juegosjson=[]
+        print("Excepcion al obtener los vehiculos", file=sys.stdout)
+        vehiculosjson=[]
         code=500
-    return juegosjson,code
+    return vehiculosjson,code
 
-def obtener_juego_por_id(id):
-    juegojson = {}
+def obtener_vehiculo_por_id(id):
+    vehiculojson = {}
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            #cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM juegos WHERE id = %s", (id,))
-            cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM juegos WHERE id =" + id)
-            juego = cursor.fetchone()
-            if juego is not None:
-                juegojson = convertir_juego_a_json(juego)
+            #cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM vehiculos WHERE id = %s", (id,))
+            cursor.execute("SELECT id, nombre, descripcion, precio,foto FROM vehiculos WHERE id =" + id)
+            vehiculo = cursor.fetchone()
+            if vehiculo is not None:
+                vehiculojson = convertir_vehiculo_a_json(vehiculo)
         conexion.close()
         code=200
     except:
-        print("Excepcion al recuperar un juego", file=sys.stdout)
+        print("Excepcion al recuperar un vehículo", file=sys.stdout)
         code=500
-    return juegojson,code
+    return vehiculojson,code
 
 
-def eliminar_juego(id):
+def eliminar_vehiculo(id):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("DELETE FROM juegos WHERE id = %s", (id,))
+            cursor.execute("DELETE FROM vehiculos WHERE id = %s", (id,))
             if cursor.rowcount == 1:
                 ret={"status": "OK" }
             else:
@@ -79,16 +79,16 @@ def eliminar_juego(id):
         conexion.close()
         code=200
     except:
-        print("Excepcion al eliminar un juego", file=sys.stdout)
+        print("Excepcion al eliminar un vehiculo", file=sys.stdout)
         ret = {"status": "Failure" }
         code=500
     return ret,code
 
-def actualizar_juego(id, nombre, descripcion, precio, foto):
+def actualizar_vehiculo(id, nombre, descripcion, precio, foto):
     try:
         conexion = obtener_conexion()
         with conexion.cursor() as cursor:
-            cursor.execute("UPDATE juegos SET nombre = %s, descripcion = %s, precio = %s, foto=%s WHERE id = %s",
+            cursor.execute("UPDATE vehiculos SET nombre = %s, descripcion = %s, precio = %s, foto=%s WHERE id = %s",
                        (nombre, descripcion, precio, foto,id))
             if cursor.rowcount == 1:
                 ret={"status": "OK" }
@@ -98,7 +98,7 @@ def actualizar_juego(id, nombre, descripcion, precio, foto):
         conexion.close()
         code=200
     except:
-        print("Excepcion al eliminar un juego", file=sys.stdout)
+        print("Excepcion al eliminar un vehiculo", file=sys.stdout)
         ret = {"status": "Failure" }
         code=500
     return ret,code

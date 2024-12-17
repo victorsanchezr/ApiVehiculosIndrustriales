@@ -13,28 +13,28 @@
         var urlParams = new URLSearchParams(queryString);
         var id = urlParams.get('id');
         onload=function(){
-            obtenerDatosJuego(id);
+            obtenerDatosVehiculo(id);
         }
-        function obtenerDatosJuego(id){
+        function obtenerDatosVehiculo(id){
             var requestOptions = {
                 method: 'GET'
             };
 
-            fetch("/juego/"+id, requestOptions)
+            fetch("/vehiculo/"+id, requestOptions)
                 .then(response => response.json())
-                .then(result => pintarJuego(result))
+                .then(result => pintarVehiculo(result))
                 .catch(error => {
                     console.log('error', error)
-                    alert("Ha habido un error al recuperar los datos del juego");
-                    location.href="/static/juegos.html";
+                    alert("Ha habido un error al recuperar los datos del vehículo");
+                    location.href="/static/vehiculos.html";
                 });
 
         }
-        function pintarJuego(juego){
-            document.getElementById("nombre").value=juego.nombre;
-            descripcion=document.getElementById("descripcion").value=juego.descripcion;
-            precio=document.getElementById("precio").value=juego.precio;
-            document.getElementById("foto").value=juego.foto;
+        function pintarVehiculo(vehiculo){
+            document.getElementById("nombre").value=vehiculo.nombre;
+            descripcion=document.getElementById("descripcion").value=vehiculo.descripcion;
+            precio=document.getElementById("precio").value=vehiculo.precio;
+            document.getElementById("foto").value=vehiculo.foto;
         }
         function guardar(){            
             let nombre=document.getElementById("nombre").value;
@@ -54,19 +54,19 @@
                 body: datos
             };
 
-            fetch("/juegos", requestOptions)
+            fetch("/vehiculos", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "OK"){
-                        alert("Juego modificado")
-                        location.href="/static/juegos.html"
+                        alert("Vehículo modificado")
+                        location.href="/static/vehiculos.html"
                     } else {
-                        alert("El juego no ha podido ser modificado")
+                        alert("El vehículo no ha podido ser modificado")
                     }
                 })
                 .catch(error => {
                     console.log('error', error);
-                    alert("Se ha producido un error y el juego no ha podido ser modificado")
+                    alert("Se ha producido un error y el vehículo no ha podido ser modificado")
                 });
         }
     </script>
@@ -83,7 +83,7 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/static/juegos">Juegos</a>
+                <a class="navbar-item" href="/static/vehiculos">Vehículos</a>
             </div>
             <div class="navbar-end">
                 <div class="navbar-item">
@@ -94,7 +94,7 @@
   <section class="section">
     <div class="columns">
         <div class="column">
-            <h3 class="is-size-3">Editar juego</h3>
+            <h3 class="is-size-3">Editar vehículo</h3>
                 <label for="nombre">Nombre:</label>
                 <input required type="text" class="input" placeholder="Nombre" name="nombre" id="nombre">
                 <label for="descripcion">Descripción</label>
