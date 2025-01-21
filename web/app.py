@@ -1,4 +1,5 @@
 import os
+
 from flask import Flask
 from variables import cargarvariables
 
@@ -13,7 +14,7 @@ import rutas_upload
 
 import rutas_verfichero
 
-import rutas_juegos
+import web.rutas_vehiculos as rutas_vehiculos
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT'))
