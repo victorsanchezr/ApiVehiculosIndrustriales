@@ -22,10 +22,21 @@ services:
       - 9093:80
     depends_on:
       - mariadb
+  apache:
+    build: ./apache
+    container_name: apache
+    volumes:
+      - ./apache/static:/var/www/html:ro
+    ports:
+      - "7777:80"
+    restart: unless-stopped
+    depends_on:
+      - python
   python:
     build: .
     container_name: python
     environment:
+      PYTHONBUFFERED: 1
       DB_USERNAME: root
       DB_PASSWORD: example
       DB_DATABASE: PEPS

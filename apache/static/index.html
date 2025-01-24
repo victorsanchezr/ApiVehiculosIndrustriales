@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP PEPS</title>
+    <style>
+        .error{
+            display: none;
+            color: red;
+        }
+    </style>
+    <script>
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        function conectar(){
+            document.getElementsByClassName("error")[0].style.display="none";
+            var raw = JSON.stringify({
+                "username": document.getElementById("username").value,
+                "password": document.getElementById("password").value
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw
+            };
+
+            fetch("/api/login", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status=="OK"){
+                        location.href="vehiculos.html";
+                    } else {
+                        document.getElementsByClassName("error")[0].style.display="block";
+                    }
+                })
+                .catch(error => console.log('error', error)); 
+        }
+    </script>
+</head>
+<body>
+    <h1>BIENVENIDO AL SISTEMA</h1>
+    <label>Usuario</label><input type="text" name="username" id="username"><br>
+    <label>Clave</label><input type="password" name="password" id="password"><br>
+    <label class="error">Usuario/clave erronea</label>
+    <button type="button" onclick="conectar()">ENVIAR</button>
+    <button type="button" onclick="location.href='registro.html'">REGISTRARSE</button>
+</body>
+</html>
