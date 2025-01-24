@@ -12,8 +12,6 @@ services:
     volumes:
       - ./mariadb_data:/var/lib/mysql
     user: mysql
-    ports:
-      - 3306:3306
   phpmyadmin:
     image: phpmyadmin
     container_name: phpmyadmin
@@ -24,3 +22,29 @@ services:
       - 9093:80
     depends_on:
       - mariadb
+  apache:
+    build: ./apache
+    container_name: apache
+    volumes:
+      - ./apache/static:/var/www/html:ro
+    ports:
+      - "7777:80"
+    restart: unless-stopped
+    depends_on:
+      - python
+  python:
+    build: .
+    container_name: python
+    environment:
+      PYTHONBUFFERED: 1
+      DB_USERNAME: root
+      DB_PASSWORD: example
+      DB_DATABASE: PEPS
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      PORT: 8080
+      HOST: 0.0.0.0
+    ports:
+      - 9094:8080
+    depends_on:
+        - mariadb
