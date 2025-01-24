@@ -43,17 +43,6 @@
     </script>
 </head>
 <body>
-    <!--
-    <h1>BIENVENIDO AL SISTEMA</h1>
-    <label>Usuario</label><input type="text" name="username" id="username"><br>
-    <label>Clave</label><input "><br>
-    <label class="error">Usuario/clave erronea</label>
-    <button type="button" onclick="conectar()">ENVIAR</button>
-    <button type="button" onclick="location.href='registro.html'">REGISTRARSE</button>
--->
-
-
-
 
 <section class="h-100 gradient-form" >
     <div class="container py-5 h-100" >
@@ -71,27 +60,27 @@
                   </div>
   
                   <form>
-                    <p>Please login to your account</p>
+                    <p>Por favor inicia sesión</p>
   
                     <div data-mdb-input-init class="form-outline mb-4">
                       <input type="text" name="username" id="username" class="form-control"
                         placeholder="Nombre de usuario" />
 
-                      <label class="form-label" for="form2Example11">Username</label>
+                      <label class="form-label" for="form2Example11">Usuario</label>
                     </div>
   
                     <div data-mdb-input-init class="form-outline mb-4">
-                      <input ttype="password" name="password" id="password" class="form-control" />
-                      <label class="form-label" for="form2Example22">Password</label>
+                      <input type="password" name="password" id="password" class="form-control" />
+                      <label class="form-label" for="form2Example22">Contraseña</label>
                     </div>
   
                     <div class="text-center pt-1 mb-5 pb-1">
-                      <button  onclick="conectar()" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Login</button>
-                
+                      <button  onclick="conectar()" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Iniciar sesión</button>
                     </div>
+                    <label class="error ">Usuario/clave erronea</label>
                     <div  class="d-flex align-items-center justify-content-center pb-4">
-                        <p class="mb-0 me-2">Don't have an account?<span>&nbsp;&nbsp;</span></p>
-                        <button  onclick="location.href='registro.html'" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-warning">Create new</button>
+                        <p class="mb-0 me-2">¿No tienes cuenta? Regístrate<span>&nbsp;&nbsp;</span></p>
+                        <button  onclick="location.href='registro.html'" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-warning">Crear cuenta</button>
                       </div>
                   </form>
   
