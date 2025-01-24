@@ -24,7 +24,7 @@
                         <td>${vehiculo.precio}</td>
                         <td>${calculariva(vehiculo.precio)}</td>
                         <td>
-                            <a href="/static/editar_vehiculo.html?id=${vehiculo.id}" class="button is-info">Editar</a>
+                            <a href="/editar_vehiculo.html?id=${vehiculo.id}" class="button is-info">Editar</a>
                         </td>
                         <td>
                             <button class="button is-danger" onclick="eliminarVehiculo(${vehiculo.id})">Eliminar</button>
@@ -79,7 +79,7 @@
                 .then(response => response.json())
                 .then(result => {
                     if (result.status == "OK"){
-                        location.href="/static/index.html";
+                        location.href="/index.html";
                     } else {
                         alert("No se ha podido cerrar sesión")
                     }
@@ -104,8 +104,8 @@
         </div>
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/static/vehiculos.html">Vehículos</a>
-                <a class="navbar-item" href="/static/subida.html">Archivos</a>
+                <a class="navbar-item" href="/vehiculos.html">Vehículos</a>
+                <a class="navbar-item" href="/subida.html">Archivos</a>
                 <a class="navbar-item" href="javascript:cerrarSesion()">Cerrar sesion</a>
             </div>
             <div class="navbar-end">
@@ -118,7 +118,7 @@
         <div class="columns">
             <div class="column">
                 <h3 class="is-size-3">Vehículos</h3>
-                <a href="/static/agregar_vehiculo.html" class="button is-success">Agregar</a>
+                <a href="/agregar_vehiculo.html" class="button is-success">Agregar</a>
                 <table class="table">
                     <thead>
                         <tr>
